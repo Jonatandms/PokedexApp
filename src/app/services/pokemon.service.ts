@@ -12,7 +12,7 @@ export class PokemonService {
 
 
   constructor() {
-    this.nextUrl = 'https://pokeapi.co/api/v2/pokemon?limit=20&ffset=0'
+    this.nextUrl = 'https://pokeapi.co/api/v2/pokemon?limit=20&ffset=00'
    }
 
    getPokemons() {
@@ -27,7 +27,6 @@ export class PokemonService {
 
       return CapacitorHttp.get(options).then(async (response) => {
         let pokemons: Pokemon[] = []
-        console.log(response)
         if(response.data) {
           const results = response.data.results
           this.nextUrl = response.data.next
@@ -44,13 +43,13 @@ export class PokemonService {
             promises.push(CapacitorHttp.get(options))
           }
           await Promise.all(promises).then((responses) => {
-            console.log(response)
             for(const response of responses) {
               const pokemonData = response.data
               const pokemonObj = new Pokemon()
               pokemonObj.id = pokemonData.id
               pokemonObj.name = pokemonData.name
               pokemonObj.type1 = pokemonData.types[0].type.name
+
               if(pokemonData.types[1]){
                 pokemonObj.type2 = pokemonData.types[1].type.name
               }
@@ -58,8 +57,12 @@ export class PokemonService {
               pokemonObj.height = pokemonData.height / 10
               pokemonObj.weight = pokemonData.weight / 10
               pokemonObj.stats = pokemonData.stats
-              pokemonObj.abilities = pokemonData.abilities.filter(ab => !ab.is_hidden).map(ab => ab.ability.name)
-              const hiddenAbilities = pokemonData.abilities.filter(ab => ab.is_hidden).map(ab => ab.ability.name)
+
+              pokemonObj.abilities = pokemonData.abilities.filter(ab => !ab.is_hidden)
+              .map(ab => ab.ability.name)
+
+              const hiddenAbilities = pokemonData.abilities.find(ab => ab.is_hidden)
+
               if(hiddenAbilities) {
                 pokemonObj.hiddenAbility = hiddenAbilities.ability.name
               }
