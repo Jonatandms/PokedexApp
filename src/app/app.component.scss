@@ -1,0 +1,89 @@
+/* Estilos generales */
+#container {
+  text-align: center;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ff0000; /* Fondo rojo */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#container img {
+  display: block;
+  margin: 0 auto 10px auto; /* Centrar la imagen con espacio debajo */
+  max-width: 100%;
+  height: auto; /* Asegurar que la imagen sea responsiva */
+}
+
+#container strong {
+  display: block;
+  font-size: 20px;
+  line-height: 26px;
+  margin-bottom: 10px; /* Espacio debajo del nombre */
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+  color: #8c8c8c;
+  margin: 0 0 20px 0; /* Espacio debajo del texto */
+}
+
+#container a {
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px 5px; /* Espacio entre los enlaces */
+  padding: 10px 15px;
+  border-radius: 10px;
+  color: white;
+  background-color: #333; /* Color de fondo de los botones */
+}
+
+/* Estilos para pantallas grandes (web) */
+@media (min-width: 1024px) {
+  #container {
+    max-width: 600px; /* Limitar el ancho en pantallas grandes */
+  }
+
+  #container strong {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  #container p {
+    font-size: 18px;
+    line-height: 24px;
+    color: #6c6c6c;
+  }
+
+  #container a {
+    font-size: 16px;
+  }
+}
+
+/* Estilos para pantallas pequeñas (móvil) */
+@media (max-width: 1023px) {
+  #container {
+    max-width: 90%; /* Ancho máximo para móviles */
+  }
+
+  #container strong {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  #container p {
+    font-size: 14px;
+    line-height: 20px;
+    color: #a0a0a0;
+  }
+
+  #container a {
+    font-size: 14px;
+    padding: 8px 12px; /* Ajustar padding en móviles */
+  }
+}
